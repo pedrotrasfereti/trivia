@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import validateLogin from '../redux/actions/validateLogin';
+import { putTokenInLocalStorage } from '../helpers/servicesAPI';
 
 const regexEmail = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
 
@@ -23,7 +24,11 @@ class Login extends React.Component {
 
   submitLogin() {
     const { dispatchValidateLogin } = this.props;
-    dispatchValidateLogin(this.state);
+    const { nome, email } = this.state;
+    putTokenInLocalStorage();
+    dispatchValidateLogin({ nome, email });
+    const { history } = this.props;
+    history.push('/settings');
   }
 
   render() {
@@ -68,6 +73,9 @@ class Login extends React.Component {
 
 Login.propTypes = {
   dispatchValidateLogin: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
