@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import validateLogin from '../redux/actions/validateLogin';
 import { putTokenInLocalStorage } from '../helpers/servicesAPI';
 
@@ -33,9 +32,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const { nome, email, redirect } = this.state;
+    const { nome, email } = this.state;
     const statusButton = !(regexEmail.test(email) && nome.length > 0);
-    if (redirect) return (<Redirect to="/game" />);
     return (
       <div>
         <label htmlFor="name-input">
