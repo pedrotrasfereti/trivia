@@ -35,7 +35,7 @@ class Login extends React.Component {
 
   openSettings() {
     const { history } = this.props;
-    history.push('/settings');
+    history.push('/game');
   }
 
   render() {
