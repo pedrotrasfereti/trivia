@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // import { Redirect } from 'react-router-dom';
 import validateLogin from '../redux/actions/validateLogin';
+import { putTokenInLocalStorage } from '../helpers/servicesAPI';
 
 const regexEmail = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
 
@@ -25,7 +26,11 @@ class Login extends React.Component {
 
   submitLogin() {
     const { dispatchValidateLogin } = this.props;
-    dispatchValidateLogin(this.state);
+    const { nome, email } = this.state;
+    putTokenInLocalStorage();
+    dispatchValidateLogin({ nome, email });
+    const { history } = this.props;
+    history.push('/settings');
   }
 
   openSettings() {
