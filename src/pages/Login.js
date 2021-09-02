@@ -16,7 +16,6 @@ class Login extends React.Component {
     this.state = {
       nome: '',
       email: '',
-      redirect: false,
     };
   }
 
@@ -29,7 +28,8 @@ class Login extends React.Component {
     const { nome, email } = this.state;
     putTokenInLocalStorage();
     dispatchValidateLogin({ nome, email });
-    this.setState({ redirect: true });
+    const { history } = this.props;
+    history.push('/settings');
   }
 
   render() {
@@ -75,6 +75,9 @@ class Login extends React.Component {
 
 Login.propTypes = {
   dispatchValidateLogin: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
