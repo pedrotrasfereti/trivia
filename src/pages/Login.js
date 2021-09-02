@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import validateLogin from '../redux/actions/validateLogin';
+import { putTokenInLocalStorage } from '../helpers/servicesAPI';
 
 const regexEmail = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
 
@@ -14,6 +16,7 @@ class Login extends React.Component {
     this.state = {
       nome: '',
       email: '',
+      redirect: false,
     };
   }
 
@@ -23,12 +26,16 @@ class Login extends React.Component {
 
   submitLogin() {
     const { dispatchValidateLogin } = this.props;
-    dispatchValidateLogin(this.state);
+    const { nome, email } = this.state;
+    putTokenInLocalStorage();
+    dispatchValidateLogin({ nome, email });
+    this.setState({ redirect: true });
   }
 
   render() {
-    const { nome, email } = this.state;
+    const { nome, email, redirect } = this.state;
     const statusButton = !(regexEmail.test(email) && nome.length > 0);
+    if (redirect) return (<Redirect to="/game" />);
     return (
       <div>
         <label htmlFor="name-input">
