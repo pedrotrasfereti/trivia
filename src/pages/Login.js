@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
 import validateLogin from '../redux/actions/validateLogin';
 
 const regexEmail = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
@@ -10,6 +11,7 @@ class Login extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
+    this.openSettings = this.openSettings.bind(this);
 
     this.state = {
       nome: '',
@@ -24,6 +26,11 @@ class Login extends React.Component {
   submitLogin() {
     const { dispatchValidateLogin } = this.props;
     dispatchValidateLogin(this.state);
+  }
+
+  openSettings() {
+    const { history } = this.props;
+    history.push('/settings');
   }
 
   render() {
@@ -61,6 +68,13 @@ class Login extends React.Component {
         >
           Jogar
         </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.openSettings }
+        >
+          Configurações
+        </button>
       </div>
     );
   }
@@ -68,6 +82,9 @@ class Login extends React.Component {
 
 Login.propTypes = {
   dispatchValidateLogin: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
