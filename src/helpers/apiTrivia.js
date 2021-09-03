@@ -1,6 +1,8 @@
-const apiTrivia = (token) => fetch(`https://opentdb.com/api.php?amount=5&token=${token}`)
-  .then((response) => response.json())
-  .then((data) => data)
-  .then((data) => (data.results));
+const apiTrivia = async (token) => {
+  const endpoint = `https://opentdb.com/api.php?amount=5&token=${token}`;
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  return data.results;
+};
 
 export default apiTrivia;
