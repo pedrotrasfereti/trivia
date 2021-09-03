@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
 import validateLogin from '../redux/actions/validateLogin';
 import { putTokenInLocalStorage } from '../helpers/servicesAPI';
 
@@ -11,6 +12,7 @@ class Login extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
+    this.openSettings = this.openSettings.bind(this);
 
     this.state = {
       nome: '',
@@ -27,6 +29,11 @@ class Login extends React.Component {
     const { nome, email } = this.state;
     putTokenInLocalStorage();
     dispatchValidateLogin({ nome, email });
+    const { history } = this.props;
+    history.push('/game');
+  }
+
+  openSettings() {
     const { history } = this.props;
     history.push('/settings');
   }
@@ -65,6 +72,13 @@ class Login extends React.Component {
           onClick={ this.submitLogin }
         >
           Jogar
+        </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.openSettings }
+        >
+          Configurações
         </button>
       </div>
     );
