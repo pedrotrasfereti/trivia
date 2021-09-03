@@ -7,21 +7,21 @@ const inicialiGame = () => {
 };
 
 class Gamepage extends React.Component {
-  constructor() {
-    super();
-  }
-
   answerRandom() {
     const answers = [
       inicialiGame[0].correct_answer,
       ...inicialiGame[0].incorrect_answers,
     ];
-    let answersRandom = 
+    const answersRandom = answers
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+    console.log(answersRandom);
   }
 
   render() {
-    const category = inicialiGame[0].category;
-    const question = inicialiGame[0].question;
+    const { category } = inicialiGame[0];
+    const { question } = inicialiGame[0];
     return (
       <div>
         <div>
