@@ -28,7 +28,7 @@ class Login extends React.Component {
     putTokenInLocalStorage();
     dispatchValidateLogin({ nome, email });
     const { history } = this.props;
-    history.push('/settings');
+    history.push('/game');
   }
 
   render() {
