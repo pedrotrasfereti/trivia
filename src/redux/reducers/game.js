@@ -1,4 +1,4 @@
-import { NEXTBUTTON_PRESS } from '../actions/pressBtn';
+import { NEXTBUTTON_PRESS, QUESTION_PRESS } from '../actions/pressBtn';
 
 const INITIAL_STATE = {
   questionNumber: 1,
