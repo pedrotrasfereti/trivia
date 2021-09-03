@@ -1,52 +1,44 @@
+// React
 import React from 'react';
-import { connect } from 'react-redux';
+
+// PropTypes
 import PropTypes from 'prop-types';
-import apiTrivia from '../helpers/apiTrivia';
+
+// Redux
+import { connect } from 'react-redux';
+
+// Children
 import HeaderGame from '../components/HeaderGame';
-import Loading from '../components/Loading';
 
 class Gamepage extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      results: {},
-      loading: true,
-    };
     this.answerRandom = this.answerRandom.bind(this);
-    this.inicialiGame = this.inicialiGame.bind(this);
-  }
-
-  componentDidMount() {
-    this.inicialiGame();
-  }
-
-  inicialiGame() {
-    const token = localStorage.getItem('token');
-    apiTrivia(token).then((results) => this.setState({ results, loading: false }));
   }
 
   answerRandom() {
     const answers = [];
-    const { results } = this.state;
-    const incorretas = results[0].incorrect_answers;
-    const correta = [results[0].correct_answer];
+    const { games } = this.props;
+    const incorretas = games[0].incorrect_answers;
+    const correta = [games[0].correct_answer];
+
     answers.push(...incorretas
       .map((answer, index) => (
         <button
           type="button"
           data-testid={ `wrong-answer-${index}` }
-          key={ index }
+          key={ `wrong-answer-${index}` }
         >
           {answer}
 
         </button>)));
     answers.push(...correta
-      .map((answer, index) => (
+      .map((answer) => (
         <button
           type="button"
           data-testid="correct-answer"
-          key={ index }
+          key="correct-answer"
         >
           {answer}
 
@@ -59,11 +51,9 @@ class Gamepage extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
-    const { questionNumber, results } = this.props;
-    if (loading) return (<Loading />);
-    const { category } = results[questionNumber];
-    const { question } = results[questionNumber];
+    const { games } = this.props;
+    const { category, question } = games[0];
+
     return (
       <div>
         <HeaderGame />
@@ -82,14 +72,12 @@ class Gamepage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  result: state.game.result,
-  questionNumber: state.game.questionNumber,
-});
-
 Gamepage.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.object).isRequired,
-  questionNumber: PropTypes.number.isRequired,
+  games: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  games: state.game.games,
+});
 
 export default connect(mapStateToProps, null)(Gamepage);
