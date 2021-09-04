@@ -1,9 +1,17 @@
+// React
 import React from 'react';
-import { connect } from 'react-redux';
+
+// PropTypes
 import PropTypes from 'prop-types';
-// import { Redirect } from 'react-router-dom';
+
+// Redux
+import { connect } from 'react-redux';
 import validateLogin from '../redux/actions/validateLogin';
+
+// Services
+import apiTrivia from '../helpers/apiTrivia';
 import { putTokenInLocalStorage } from '../helpers/servicesAPI';
+import { setGameInfo } from '../redux/actions/game';
 
 const regexEmail = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
 
@@ -20,17 +28,34 @@ class Login extends React.Component {
     };
   }
 
+  async setQuestions() {
+    const { dispatchGameInfo } = this.props;
+    const token = localStorage.getItem('token') || '';
+
+    await apiTrivia(token)
+      .then((results) => dispatchGameInfo(results));
+
+    // Redirecionar para a tela de jogo
+    const { history } = this.props;
+    history.push('/game');
+  }
+
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value });
   }
 
   submitLogin() {
+    // Guardar login na store
     const { dispatchValidateLogin } = this.props;
     const { nome, email } = this.state;
-    putTokenInLocalStorage();
     dispatchValidateLogin({ nome, email });
-    const { history } = this.props;
-    history.push('/game');
+
+    // Guardar token no local storage
+    putTokenInLocalStorage();
+
+    // Guardar as informações de jogo na store
+    const interval = 2000;
+    setTimeout(() => this.setQuestions(), interval);
   }
 
   openSettings() {
@@ -87,6 +112,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   dispatchValidateLogin: PropTypes.func.isRequired,
+  dispatchGameInfo: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -94,6 +120,7 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchValidateLogin: (value) => dispatch(validateLogin(value)),
+  dispatchGameInfo: (value) => dispatch(setGameInfo(value)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

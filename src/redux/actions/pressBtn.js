@@ -6,7 +6,7 @@ export const pressNextBtn = () => (
   }
 );
 
-export const QUESTION_PRESS = 'NEXTBUTTON_PRESS';
+export const QUESTION_PRESS = 'QUESTION_PRESS';
 
 export const pressQuestionBtn = () => (
   {

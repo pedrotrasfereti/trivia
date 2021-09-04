@@ -33,16 +33,14 @@ class HeaderGame extends Component {
         },
       }
     */
-    const state = {
-      player: {
-        name: playerName,
-        assertions: 0,
-        score: 0,
-        gravatarEmail: gravatar(playerEmail),
-      },
+    const player = {
+      name: playerName,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: gravatar(playerEmail),
     };
 
-    window.localStorage.setItem('state', JSON.stringify(state));
+    window.localStorage.setItem('state', JSON.stringify(player));
   }
 
   render() {
