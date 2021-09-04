@@ -1,0 +1,9 @@
+/* Borda alternativa correta */
+.Gamepage .correct-highlight {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+/* Borda alternativas incorretas */
+.Gamepage .incorrect-highlight {
+  border: 3px solid rgb(255, 0, 0);
+}
