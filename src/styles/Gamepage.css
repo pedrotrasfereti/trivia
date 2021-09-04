@@ -5,5 +5,5 @@
 
 /* Borda alternativas incorretas */
 .Gamepage .incorrect-highlight {
-  border: 3px solid 'red';
+  border: 3px solid red;
 }
