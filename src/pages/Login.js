@@ -27,10 +27,9 @@ class Login extends React.Component {
       email: '',
     };
   }
-
   async setQuestions() {
     const { dispatchGameInfo } = this.props;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || "";
 
     await apiTrivia(token)
       .then((results) => dispatchGameInfo(results));
