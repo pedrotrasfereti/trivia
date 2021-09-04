@@ -19,9 +19,9 @@ class Gamepage extends React.Component {
 
   answerRandom() {
     const answers = [];
-    const { games } = this.props;
-    const incorretas = games[0].incorrect_answers;
-    const correta = [games[0].correct_answer];
+    const { games, question } = this.props;
+    const incorretas = games[question].incorrect_answers;
+    const correta = [games[question].correct_answer];
 
     answers.push(...incorretas
       .map((answer, index) => (
@@ -74,10 +74,12 @@ class Gamepage extends React.Component {
 
 Gamepage.propTypes = {
   games: PropTypes.arrayOf(PropTypes.object).isRequired,
+  question: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   games: state.game.games,
+  question: state.game.question,
 });
 
 export default connect(mapStateToProps, null)(Gamepage);
