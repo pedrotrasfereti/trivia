@@ -10,7 +10,19 @@ class NextBtn extends React.Component {
     this.triggerNextQuestion = this.triggerNextQuestion.bind(this);
   }
 
+  clearStyles() {
+    // Remove estilo da alternativa correta
+    const correta = document.querySelector('#correct-answer');
+    correta.classList.remove('correct-highlight');
+
+    // Remove estilo das alternativas incorretas
+    const incorretas = document.querySelectorAll('.incorrect-highlight');
+    incorretas.forEach((el) => el.classList.remove('incorrect-highlight'));
+  }
+
   triggerNextQuestion() {
+    this.clearStyles();
+
     const { pushBtn, games, numberOfQuestion } = this.props;
     const numeroDePerguntas = Object.keys(games).length;
     const feedbackString = 'Redireciona para tela de feedback';
@@ -24,7 +36,7 @@ class NextBtn extends React.Component {
     return (
       <button
         type="button"
-        onClick={ this.triggerNextQuestion }
+        onClick={ () => this.triggerNextQuestion() }
         data-testid="btn-next"
         style={
           disable ? { display: 'none' } : { display: 'flex' }
