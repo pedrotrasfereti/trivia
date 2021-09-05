@@ -6,21 +6,71 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
+import { setAnswers, setAssertions, toggleTimer } from '../redux/actions/game';
 import { pressQuestionBtn } from '../redux/actions/pressBtn';
 
 // Children
 import HeaderGame from '../components/HeaderGame';
 import NextBtn from '../components/NextBtn';
+import GameTimer from '../components/GameTimer';
+import GameAnswers from '../components/GameAnswers';
+
+// Helpers
+import shuffleAnswers from '../helpers/shuffleAnswers';
 
 // Styles
 import '../styles/Gamepage.css';
 
 class Gamepage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.answerRandom = this.answerRandom.bind(this);
+    this.setAnswers = this.setAnswers.bind(this);
     this.enableNextBtn = this.enableNextBtn.bind(this);
+    this.setAssertions = this.setAssertions.bind(this);
+    this.addStyles = this.addStyles.bind(this);
+    this.answered = this.answered.bind(this);
+  }
+
+  componentDidMount() {
+    const { toggleTimerDispatch } = this.props;
+    this.setAnswers();
+    toggleTimerDispatch();
+  }
+
+  componentDidUpdate() {
+    this.setAnswers();
+  }
+
+  /* As funções a seguir estão relacionadas com os eventos das respostas */
+  setAnswers() {
+    const {
+      game,
+      questionNumber,
+      setAnswersDispatch,
+    } = this.props;
+
+    shuffleAnswers(
+      game,
+      questionNumber,
+      setAnswersDispatch,
+      this.answered,
+    ); // Salva as respostas na chave answers do estado global
+  }
+
+  setAssertions(target) {
+    const { setAssertionsDispatch } = this.props;
+    // Acertos
+    let assertions = 0;
+
+    if (target.id === 'correct-answer') {
+      assertions += 1;
+      console.log('Alternativa correta!');
+    }
+
+    console.log('Alternativa incorreta.');
+
+    setAssertionsDispatch(assertions);
   }
 
   enableNextBtn() {
@@ -28,63 +78,50 @@ class Gamepage extends React.Component {
     enableNextBtnDispatch();
   }
 
-  handleAnswerClick() {
+  addStyles() {
     // Adiciona estilo para a alternativa correta
     const correta = document.querySelector('#correct-answer');
     correta.classList.add('correct-highlight');
 
+    // Disabilita botões de resposta
+    correta.disabled = true;
+
     // Adiciona estilo para as alternativas incorretas
     const incorretas = document.querySelectorAll('.incorrect-answer');
-    incorretas.forEach((el) => el.classList.add('incorrect-highlight'));
+    incorretas.forEach((el) => {
+      el.classList.add('incorrect-highlight');
+
+      // Disabilita botões de resposta
+      el.disabled = true;
+    });
+  }
+
+  answered({ target }) {
+    const { toggleTimerDispatch } = this.props;
+    // Desligar timer
+    toggleTimerDispatch();
+
+    // Estilos
+    this.addStyles();
+
+    // Atualizar pontuação
+    this.setAssertions(target);
 
     // Habilitar nova pergunta
     this.enableNextBtn();
   }
 
-  answerRandom() {
-    const answers = [];
-    const { games, questionNumber } = this.props;
-    const incorretas = games[questionNumber].incorrect_answers;
-    const correta = [games[questionNumber].correct_answer];
-
-    answers.push(...incorretas
-      .map((answer, index) => (
-        <button
-          type="button"
-          className="incorrect-answer"
-          data-testid={ `wrong-answer-${index}` }
-          key={ `wrong-answer-${index}` }
-          onClick={ (evt) => this.handleAnswerClick(evt) }
-        >
-          {answer}
-
-        </button>)));
-    answers.push(...correta
-      .map((answer) => (
-        <button
-          type="button"
-          id="correct-answer"
-          data-testid="correct-answer"
-          key="correct-answer"
-          onClick={ (evt) => this.handleAnswerClick(evt) }
-        >
-          {answer}
-
-        </button>)));
-    return answers
-      .map((value) => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
-  }
-
   render() {
-    const { games, questionNumber } = this.props;
-    const { category, question } = games[questionNumber];
+    const { game, questionNumber } = this.props;
+    const { category, question } = game[questionNumber];
 
     return (
       <section className="Gamepage">
         <HeaderGame />
-        Sou uma Página de game
+        <GameTimer
+          addStyles={ this.addStyles }
+          enableNextBtn={ this.enableNextBtn }
+        />
         <div>
           <h3 data-testid="question-category">
             { category }
@@ -92,7 +129,7 @@ class Gamepage extends React.Component {
           <p data-testid="question-text">
             { question }
           </p>
-          {this.answerRandom()}
+          <GameAnswers />
         </div>
         <NextBtn />
       </section>
@@ -101,18 +138,24 @@ class Gamepage extends React.Component {
 }
 
 Gamepage.propTypes = {
-  games: PropTypes.arrayOf(PropTypes.object).isRequired,
-  questionNumber: PropTypes.number.isRequired,
-  enableNextBtnDispatch: PropTypes.func.isRequired,
+  game: PropTypes.arrayOf(PropTypes.object).isRequired, // Array de perguntas
+  questionNumber: PropTypes.number.isRequired, // Número da pergunta
+  setAnswersDispatch: PropTypes.func.isRequired, // Salvar respostas
+  setAssertionsDispatch: PropTypes.func.isRequired, // Salvar pontuação
+  enableNextBtnDispatch: PropTypes.func.isRequired, // Habilitar nova pergunta
+  toggleTimerDispatch: PropTypes.func.isRequired, // Ligar/Desligar timer
 };
 
 const mapStateToProps = (state) => ({
-  games: state.game.games,
-  questionNumber: state.game.question,
+  game: state.game.game,
+  questionNumber: state.game.questionNumber,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  enableNextBtnDispatch: () => dispatch(pressQuestionBtn()),
+  setAnswersDispatch: (payload) => dispatch(setAnswers(payload)),
+  setAssertionsDispatch: (payload) => dispatch(setAssertions(payload)),
+  enableNextBtnDispatch: (payload) => dispatch(pressQuestionBtn(payload)),
+  toggleTimerDispatch: () => dispatch(toggleTimer()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gamepage);
