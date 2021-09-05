@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
+import { pressQuestionBtn } from '../redux/actions/pressBtn';
 
 // Children
 import HeaderGame from '../components/HeaderGame';
-
 import NextBtn from '../components/NextBtn';
-import { pressQuestionBtn } from '../redux/actions/pressBtn';
+
+// Styles
+import '../styles/Gamepage.css';
 
 class Gamepage extends React.Component {
   constructor() {
@@ -22,8 +24,21 @@ class Gamepage extends React.Component {
   }
 
   enableNextBtn() {
-    const { enableNextBtn } = this.props;
-    enableNextBtn();
+    const { enableNextBtnDispatch } = this.props;
+    enableNextBtnDispatch();
+  }
+
+  handleAnswerClick() {
+    // Adiciona estilo para a alternativa correta
+    const correta = document.querySelector('#correct-answer');
+    correta.classList.add('correct-highlight');
+
+    // Adiciona estilo para as alternativas incorretas
+    const incorretas = document.querySelectorAll('.incorrect-answer');
+    incorretas.forEach((el) => el.classList.add('incorrect-highlight'));
+
+    // Habilitar nova pergunta
+    this.enableNextBtn();
   }
 
   answerRandom() {
@@ -36,9 +51,10 @@ class Gamepage extends React.Component {
       .map((answer, index) => (
         <button
           type="button"
+          className="incorrect-answer"
           data-testid={ `wrong-answer-${index}` }
           key={ `wrong-answer-${index}` }
-          onClick={ this.enableNextBtn }
+          onClick={ (evt) => this.handleAnswerClick(evt) }
         >
           {answer}
 
@@ -47,9 +63,10 @@ class Gamepage extends React.Component {
       .map((answer) => (
         <button
           type="button"
+          id="correct-answer"
           data-testid="correct-answer"
           key="correct-answer"
-          onClick={ this.enableNextBtn }
+          onClick={ (evt) => this.handleAnswerClick(evt) }
         >
           {answer}
 
@@ -65,7 +82,7 @@ class Gamepage extends React.Component {
     const { category, question } = games[questionNumber];
 
     return (
-      <div>
+      <section className="Gamepage">
         <HeaderGame />
         Sou uma Página de game
         <div>
@@ -77,8 +94,8 @@ class Gamepage extends React.Component {
           </p>
           {this.answerRandom()}
         </div>
-        <div><NextBtn /></div>
-      </div>
+        <NextBtn />
+      </section>
     );
   }
 }
@@ -86,7 +103,7 @@ class Gamepage extends React.Component {
 Gamepage.propTypes = {
   games: PropTypes.arrayOf(PropTypes.object).isRequired,
   questionNumber: PropTypes.number.isRequired,
-  enableNextBtn: PropTypes.func.isRequired,
+  enableNextBtnDispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -95,7 +112,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  enableNextBtn: () => dispatch(pressQuestionBtn()),
+  enableNextBtnDispatch: () => dispatch(pressQuestionBtn()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gamepage);
