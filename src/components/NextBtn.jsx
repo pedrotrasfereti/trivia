@@ -1,8 +1,13 @@
+// React
 import React from 'react';
-import { connect } from 'react-redux';
+
+// PropTypes
 import PropTypes from 'prop-types';
 
+// Redux
+import { connect } from 'react-redux';
 import { pressNextBtn } from '../redux/actions/pressBtn';
+import { toggleTimer } from '../redux/actions/game';
 
 class NextBtn extends React.Component {
   constructor() {
@@ -14,21 +19,26 @@ class NextBtn extends React.Component {
     // Remove estilo da alternativa correta
     const correta = document.querySelector('#correct-answer');
     correta.classList.remove('correct-highlight');
+    correta.disabled = false;
 
     // Remove estilo das alternativas incorretas
     const incorretas = document.querySelectorAll('.incorrect-highlight');
-    incorretas.forEach((el) => el.classList.remove('incorrect-highlight'));
+    incorretas.forEach((el) => {
+      el.classList.remove('incorrect-highlight');
+      el.disabled = false;
+    });
   }
 
   triggerNextQuestion() {
+    const { toggleTimerDispatch } = this.props;
+    toggleTimerDispatch();
     this.clearStyles();
 
-    const { pushBtn, games, numberOfQuestion } = this.props;
-    const numeroDePerguntas = Object.keys(games).length;
+    const { pushBtn, game, questionNumber } = this.props;
+    const numeroDePerguntas = Object.keys(game).length;
     const feedbackString = 'Redireciona para tela de feedback';
-    const ternário = numberOfQuestion !== numeroDePerguntas - 1 ? pushBtn()
+    return questionNumber !== numeroDePerguntas - 1 ? pushBtn()
       : console.log(feedbackString);
-    return ternário;
   }
 
   render() {
@@ -49,20 +59,22 @@ class NextBtn extends React.Component {
 }
 
 NextBtn.propTypes = {
-  pushBtn: PropTypes.func.isRequired,
+  game: PropTypes.arrayOf(PropTypes.object).isRequired,
+  questionNumber: PropTypes.number.isRequired,
   disable: PropTypes.bool.isRequired,
-  games: PropTypes.arrayOf(PropTypes.object).isRequired,
-  numberOfQuestion: PropTypes.number.isRequired,
+  pushBtn: PropTypes.func.isRequired,
+  toggleTimerDispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  game: state.game.game,
+  questionNumber: state.game.questionNumber,
   disable: state.game.disable,
-  games: state.game.games,
-  numberOfQuestion: state.game.question,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   pushBtn: () => (dispatch(pressNextBtn())),
+  toggleTimerDispatch: () => dispatch(toggleTimer()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NextBtn);
