@@ -44,7 +44,7 @@ class HeaderGame extends Component {
   }
 
   render() {
-    const { props: { playerEmail, playerName } } = this;
+    const { props: { assertions, playerEmail, playerName } } = this;
     const gravatarSrc = gravatar(playerEmail);
     return (
       <header>
@@ -67,7 +67,7 @@ class HeaderGame extends Component {
           id="header-score"
           data-testid="header-score"
         >
-          0
+          { assertions }
         </span>
       </header>
     );
@@ -77,11 +77,13 @@ class HeaderGame extends Component {
 HeaderGame.propTypes = {
   playerName: PropTypes.string.isRequired,
   playerEmail: PropTypes.string.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (store) => ({
   playerName: store.login.nome,
   playerEmail: store.login.email,
+  assertions: store.game.assertions,
 });
 
 export default connect(mapStateToProps, null)(HeaderGame);
