@@ -1,6 +1,9 @@
 // React
 import React from 'react';
 
+// Router
+import { withRouter } from 'react-router';
+
 // PropTypes
 import PropTypes from 'prop-types';
 
@@ -35,12 +38,18 @@ class NextBtn extends React.Component {
     this.clearStyles();
     const { pushBtn, game, questionNumber } = this.props;
     const numeroDePerguntas = Object.keys(game).length;
-    const feedbackString = 'Redireciona para tela de feedback';
-    if (questionNumber !== numeroDePerguntas - 1) {
+    if (questionNumber !== (numeroDePerguntas - 1)) {
       await pushBtn();
       setAnswers();
     }
-    console.log(feedbackString);
+    if (questionNumber === (numeroDePerguntas - 1)) {
+      this.redirectToFeedback();
+    }
+  }
+
+  redirectToFeedback() {
+    const { history } = this.props;
+    history.push('/feedback');
   }
 
   render() {
@@ -67,6 +76,9 @@ NextBtn.propTypes = {
   pushBtn: PropTypes.func.isRequired,
   setAnswers: PropTypes.func.isRequired,
   toggleTimerDispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -80,4 +92,4 @@ const mapDispatchToProps = (dispatch) => ({
   toggleTimerDispatch: () => dispatch(toggleTimer()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NextBtn);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NextBtn));
