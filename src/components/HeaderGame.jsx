@@ -11,40 +11,8 @@ import { connect } from 'react-redux';
 import gravatar from '../helpers/gravatarAPI';
 
 class HeaderGame extends Component {
-  constructor(props) {
-    // Super marked as "deprecated"
-    super(props);
-    this.playerLocalStorage = this.playerLocalStorage.bind(this);
-  }
-
-  componentDidMount() {
-    this.playerLocalStorage();
-  }
-
-  playerLocalStorage() {
-    const { props: { playerEmail, playerName } } = this;
-    /*
-      state: {
-          player: {
-          name,
-          assertions,
-          score,
-          gravatarEmail
-        },
-      }
-    */
-    const player = { player: {
-      name: playerName,
-      assertions: 0,
-      score: 0,
-      gravatarEmail: gravatar(playerEmail),
-    } };
-
-    window.localStorage.setItem('state', JSON.stringify(player));
-  }
-
   render() {
-    const { props: { assertions, playerEmail, playerName } } = this;
+    const { props: { score, playerEmail, playerName } } = this;
     const gravatarSrc = gravatar(playerEmail);
     return (
       <header>
@@ -67,7 +35,7 @@ class HeaderGame extends Component {
           id="header-score"
           data-testid="header-score"
         >
-          { assertions }
+          { score }
         </span>
       </header>
     );
@@ -77,13 +45,13 @@ class HeaderGame extends Component {
 HeaderGame.propTypes = {
   playerName: PropTypes.string.isRequired,
   playerEmail: PropTypes.string.isRequired,
-  assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (store) => ({
   playerName: store.login.nome,
   playerEmail: store.login.email,
-  assertions: store.game.assertions,
+  score: store.header.score,
 });
 
 export default connect(mapStateToProps, null)(HeaderGame);

@@ -4,6 +4,7 @@ export const SET_ANSWERS = 'SET_ANSWERS';
 export const SET_ASSERTIONS = 'SET_ASSERTIONS';
 export const TOGGLE_TIMER = 'TOGGLE_TIMER';
 export const SET_TIMER = 'SET_TIMER';
+export const SET_SCORE = 'SET_SCORE';
 
 // Action Creators
 export const setGameInfo = (payload) => ({
@@ -27,6 +28,11 @@ export const setAnswers = (payload) => {
 export const setAssertions = (assertions) => ({
   type: SET_ASSERTIONS,
   assertions,
+});
+
+export const setScore = (payload) => ({
+  type: SET_SCORE,
+  payload,
 });
 
 export const toggleTimer = () => ({

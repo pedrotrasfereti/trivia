@@ -6,8 +6,12 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { setAnswers, setAssertions, toggleTimer } from '../redux/actions/game';
+import { setAnswers, setAssertions,
+  toggleTimer, setScore } from '../redux/actions/game';
 import { pressQuestionBtn } from '../redux/actions/pressBtn';
+
+// Helpers
+import gravatar from '../helpers/gravatarAPI';
 
 // Children
 import HeaderGame from '../components/HeaderGame';
@@ -30,10 +34,12 @@ class Gamepage extends React.Component {
     this.setAssertions = this.setAssertions.bind(this);
     this.addStyles = this.addStyles.bind(this);
     this.answered = this.answered.bind(this);
+    this.playerLocalStorage = this.playerLocalStorage.bind(this);
     this.sendScoreToLocalStorage = this.sendScoreToLocalStorage.bind(this);
   }
 
   componentDidMount() {
+    this.playerLocalStorage();
     const { toggleTimerDispatch } = this.props;
     this.setAnswers();
     toggleTimerDispatch();
@@ -70,6 +76,28 @@ class Gamepage extends React.Component {
     setAssertionsDispatch(assertions);
   }
 
+  playerLocalStorage() {
+    const { props: { playerEmail, playerName } } = this;
+    /*
+      state: {
+          player: {
+          name,
+          assertions,
+          score,
+          gravatarEmail
+        },
+      }
+    */
+    const player = { player: {
+      name: playerName,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: gravatar(playerEmail),
+    } };
+
+    window.localStorage.setItem('state', JSON.stringify(player));
+  }
+
   enableNextBtn() {
     const { enableNextBtnDispatch } = this.props;
     enableNextBtnDispatch();
@@ -94,10 +122,9 @@ class Gamepage extends React.Component {
   }
 
   sendScoreToLocalStorage(target) {
-    console.log(target.id);
     if (target.id === 'correct-answer') {
       // Obtendo dados
-      const { timer } = this.props;
+      const { timer, scoreDispatch } = this.props;
       // = this.state utilizar o timer do state;
       const { game, questionNumber } = this.props;
       const { difficulty } = game[questionNumber];
@@ -122,6 +149,7 @@ class Gamepage extends React.Component {
       state.player.score += defaultReward + valor * timer;
       // devolvendo os dados para o localStorage
       localStorage.setItem('state', JSON.stringify(state));
+      scoreDispatch(state.player.score);
     }
   }
 
@@ -168,6 +196,8 @@ class Gamepage extends React.Component {
 }
 
 Gamepage.propTypes = {
+  playerName: PropTypes.string.isRequired,
+  playerEmail: PropTypes.string.isRequired,
   game: PropTypes.arrayOf(PropTypes.object).isRequired, // Array de perguntas
   questionNumber: PropTypes.number.isRequired, // Número da pergunta
   timer: PropTypes.number.isRequired, // Número do tempo
@@ -175,12 +205,15 @@ Gamepage.propTypes = {
   setAssertionsDispatch: PropTypes.func.isRequired, // Salvar pontuação
   enableNextBtnDispatch: PropTypes.func.isRequired, // Habilitar nova pergunta
   toggleTimerDispatch: PropTypes.func.isRequired, // Ligar/Desligar timer
+  scoreDispatch: PropTypes.func.isRequired, // Ligar/Desligar timer
 };
 
 const mapStateToProps = (state) => ({
   game: state.game.game,
   questionNumber: state.game.questionNumber,
   timer: state.game.timer,
+  playerName: state.login.nome,
+  playerEmail: state.login.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -188,6 +221,7 @@ const mapDispatchToProps = (dispatch) => ({
   setAssertionsDispatch: (payload) => dispatch(setAssertions(payload)),
   enableNextBtnDispatch: (payload) => dispatch(pressQuestionBtn(payload)),
   toggleTimerDispatch: () => dispatch(toggleTimer()),
+  scoreDispatch: (payload) => dispatch(setScore(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gamepage);
