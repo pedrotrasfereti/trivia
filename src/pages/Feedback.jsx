@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
 
+// Children
+import PlayAgain from '../components/PlayAgain';
+
 class Feedback extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +32,7 @@ class Feedback extends Component {
         <span data-testid="feedback-text">
           { this.renderMessage() }
         </span>
+        <PlayAgain />
       </section>
     );
   }
