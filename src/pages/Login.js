@@ -44,18 +44,17 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  submitLogin() {
+  async submitLogin() {
     // Guardar login na store
     const { dispatchValidateLogin } = this.props;
     const { nome, email } = this.state;
-    dispatchValidateLogin({ nome, email });
+    await dispatchValidateLogin({ nome, email });
 
     // Guardar token no local storage
     putTokenInLocalStorage();
 
     // Guardar as informações de jogo na store
-    const interval = 2000;
-    setTimeout(() => this.setQuestions(), interval);
+    await this.setQuestions();
   }
 
   openSettings() {

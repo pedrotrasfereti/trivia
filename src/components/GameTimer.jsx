@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { toggleTimer } from '../redux/actions/game';
+import { toggleTimer, setTimerGlobal } from '../redux/actions/game';
 
 class GameTimer extends Component {
   constructor(props) {
@@ -35,11 +35,12 @@ class GameTimer extends Component {
 
   tick() {
     const { timeLeft } = this.state;
+    const { timerDispatch } = this.props;
 
     if (timeLeft > 0) {
       this.setState((prev) => ({
         timeLeft: prev.timeLeft - 1,
-      }));
+      }), () => timerDispatch(timeLeft));
     } else {
       this.timesUp();
     }
@@ -77,6 +78,7 @@ GameTimer.propTypes = {
   timerOn: PropTypes.bool.isRequired,
   addStyles: PropTypes.func.isRequired,
   enableNextBtn: PropTypes.func.isRequired,
+  timerDispatch: PropTypes.func.isRequired,
   toggleTimerDispatch: PropTypes.func.isRequired,
 };
 
@@ -86,6 +88,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   toggleTimerDispatch: () => dispatch(toggleTimer()),
+  timerDispatch: (payload) => dispatch(setTimerGlobal(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameTimer);

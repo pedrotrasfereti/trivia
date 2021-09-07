@@ -4,11 +4,13 @@ import {
   SET_ANSWERS,
   SET_ASSERTIONS,
   TOGGLE_TIMER,
+  SET_TIMER,
 } from '../actions/game';
 
 const INITIAL_STATE = {
   game: [], // O array de perguntas
   questionNumber: 0, // O número da pergunta
+  timer: 30,
   answers: [], // Array de respostas
   assertions: 0, // Número de acertos
   timerOn: false, // Liga/Desliga temporizador
@@ -40,6 +42,10 @@ const game = (state = INITIAL_STATE, action) => {
   case TOGGLE_TIMER:
     return {
       ...state, timerOn: !state.timerOn,
+    };
+  case SET_TIMER:
+    return {
+      ...state, timer: action.payload,
     };
   default:
     return state;
