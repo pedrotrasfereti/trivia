@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 // Children
 import PlayAgain from '../components/PlayAgain';
+import ViewRanking from '../components/ViewRanking';
 
 class Feedback extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Feedback extends Component {
           { this.renderMessage() }
         </span>
         <PlayAgain />
+        <ViewRanking />
       </section>
     );
   }
