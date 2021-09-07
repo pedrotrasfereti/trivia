@@ -11,38 +11,6 @@ import { connect } from 'react-redux';
 import gravatar from '../helpers/gravatarAPI';
 
 class HeaderGame extends Component {
-  constructor(props) {
-    // Super marked as "deprecated"
-    super(props);
-    this.playerLocalStorage = this.playerLocalStorage.bind(this);
-  }
-
-  componentDidMount() {
-    this.playerLocalStorage();
-  }
-
-  playerLocalStorage() {
-    const { props: { playerEmail, playerName } } = this;
-    /*
-      state: {
-          player: {
-          name,
-          assertions,
-          score,
-          gravatarEmail
-        },
-      }
-    */
-    const player = { player: {
-      name: playerName,
-      assertions: 0,
-      score: 0,
-      gravatarEmail: gravatar(playerEmail),
-    } };
-
-    window.localStorage.setItem('state', JSON.stringify(player));
-  }
-
   render() {
     const { props: { score, playerEmail, playerName } } = this;
     const gravatarSrc = gravatar(playerEmail);

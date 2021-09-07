@@ -10,6 +10,9 @@ import { setAnswers, setAssertions,
   toggleTimer, setScore } from '../redux/actions/game';
 import { pressQuestionBtn } from '../redux/actions/pressBtn';
 
+// Helpers
+import gravatar from '../helpers/gravatarAPI';
+
 // Children
 import HeaderGame from '../components/HeaderGame';
 import NextBtn from '../components/NextBtn';
@@ -31,10 +34,12 @@ class Gamepage extends React.Component {
     this.setAssertions = this.setAssertions.bind(this);
     this.addStyles = this.addStyles.bind(this);
     this.answered = this.answered.bind(this);
+    this.playerLocalStorage = this.playerLocalStorage.bind(this);
     this.sendScoreToLocalStorage = this.sendScoreToLocalStorage.bind(this);
   }
 
   componentDidMount() {
+    this.playerLocalStorage();
     const { toggleTimerDispatch } = this.props;
     this.setAnswers();
     toggleTimerDispatch();
@@ -69,6 +74,28 @@ class Gamepage extends React.Component {
     }
 
     setAssertionsDispatch(assertions);
+  }
+
+  playerLocalStorage() {
+    const { props: { playerEmail, playerName } } = this;
+    /*
+      state: {
+          player: {
+          name,
+          assertions,
+          score,
+          gravatarEmail
+        },
+      }
+    */
+    const player = { player: {
+      name: playerName,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: gravatar(playerEmail),
+    } };
+
+    window.localStorage.setItem('state', JSON.stringify(player));
   }
 
   enableNextBtn() {
@@ -169,6 +196,8 @@ class Gamepage extends React.Component {
 }
 
 Gamepage.propTypes = {
+  playerName: PropTypes.string.isRequired,
+  playerEmail: PropTypes.string.isRequired,
   game: PropTypes.arrayOf(PropTypes.object).isRequired, // Array de perguntas
   questionNumber: PropTypes.number.isRequired, // Número da pergunta
   timer: PropTypes.number.isRequired, // Número do tempo
@@ -183,6 +212,8 @@ const mapStateToProps = (state) => ({
   game: state.game.game,
   questionNumber: state.game.questionNumber,
   timer: state.game.timer,
+  playerName: state.login.nome,
+  playerEmail: state.login.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
