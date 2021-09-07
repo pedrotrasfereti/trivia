@@ -29,16 +29,18 @@ class NextBtn extends React.Component {
     });
   }
 
-  triggerNextQuestion() {
-    const { toggleTimerDispatch } = this.props;
+  async triggerNextQuestion() {
+    const { toggleTimerDispatch, setAnswers } = this.props;
     toggleTimerDispatch();
     this.clearStyles();
-
     const { pushBtn, game, questionNumber } = this.props;
     const numeroDePerguntas = Object.keys(game).length;
     const feedbackString = 'Redireciona para tela de feedback';
-    return questionNumber !== numeroDePerguntas - 1 ? pushBtn()
-      : console.log(feedbackString);
+    if (questionNumber !== numeroDePerguntas - 1) {
+      await pushBtn();
+      setAnswers();
+    }
+    console.log(feedbackString);
   }
 
   render() {
@@ -63,6 +65,7 @@ NextBtn.propTypes = {
   questionNumber: PropTypes.number.isRequired,
   disable: PropTypes.bool.isRequired,
   pushBtn: PropTypes.func.isRequired,
+  setAnswers: PropTypes.func.isRequired,
   toggleTimerDispatch: PropTypes.func.isRequired,
 };
 

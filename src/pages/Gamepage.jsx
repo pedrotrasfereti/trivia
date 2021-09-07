@@ -30,16 +30,13 @@ class Gamepage extends React.Component {
     this.setAssertions = this.setAssertions.bind(this);
     this.addStyles = this.addStyles.bind(this);
     this.answered = this.answered.bind(this);
+    this.sendScoreToLocalStorage = this.sendScoreToLocalStorage.bind(this);
   }
 
   componentDidMount() {
     const { toggleTimerDispatch } = this.props;
     this.setAnswers();
     toggleTimerDispatch();
-  }
-
-  componentDidUpdate() {
-    this.setAnswers();
   }
 
   /* As funções a seguir estão relacionadas com os eventos das respostas */
@@ -66,9 +63,9 @@ class Gamepage extends React.Component {
     if (target.id === 'correct-answer') {
       assertions += 1;
       console.log('Alternativa correta!');
+    } else {
+      console.log('Alternativa incorreta.');
     }
-
-    console.log('Alternativa incorreta.');
 
     setAssertionsDispatch(assertions);
   }
@@ -96,6 +93,38 @@ class Gamepage extends React.Component {
     });
   }
 
+  sendScoreToLocalStorage(target) {
+    console.log(target.id);
+    if (target.id === 'correct-answer') {
+      // Obtendo dados
+      const { timer } = this.props;
+      // = this.state utilizar o timer do state;
+      const { game, questionNumber } = this.props;
+      const { difficulty } = game[questionNumber];
+      // Utilizando variaveis de controle
+      const obj = { hard: 3, medium: 2, easy: 1 };
+      let valor;
+      switch (difficulty) {
+      case 'hard':
+        valor = obj.hard;
+        break;
+      case 'medium':
+        valor = obj.medium;
+        break;
+      case 'easy':
+        valor = obj.easy;
+        break;
+      default:
+      }
+      // Obtendo dados do localStorage
+      const state = JSON.parse(localStorage.getItem('state'));
+      const defaultReward = 10;
+      state.player.score += defaultReward + valor * timer;
+      // devolvendo os dados para o localStorage
+      localStorage.setItem('state', JSON.stringify(state));
+    }
+  }
+
   answered({ target }) {
     const { toggleTimerDispatch } = this.props;
     // Desligar timer
@@ -105,6 +134,7 @@ class Gamepage extends React.Component {
     this.addStyles();
 
     // Atualizar pontuação
+    this.sendScoreToLocalStorage(target);
     this.setAssertions(target);
 
     // Habilitar nova pergunta
@@ -131,7 +161,7 @@ class Gamepage extends React.Component {
           </p>
           <GameAnswers />
         </div>
-        <NextBtn />
+        <NextBtn setAnswers={ this.setAnswers } />
       </section>
     );
   }
@@ -140,6 +170,7 @@ class Gamepage extends React.Component {
 Gamepage.propTypes = {
   game: PropTypes.arrayOf(PropTypes.object).isRequired, // Array de perguntas
   questionNumber: PropTypes.number.isRequired, // Número da pergunta
+  timer: PropTypes.number.isRequired, // Número do tempo
   setAnswersDispatch: PropTypes.func.isRequired, // Salvar respostas
   setAssertionsDispatch: PropTypes.func.isRequired, // Salvar pontuação
   enableNextBtnDispatch: PropTypes.func.isRequired, // Habilitar nova pergunta
@@ -149,6 +180,7 @@ Gamepage.propTypes = {
 const mapStateToProps = (state) => ({
   game: state.game.game,
   questionNumber: state.game.questionNumber,
+  timer: state.game.timer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
