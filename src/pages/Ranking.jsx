@@ -1,4 +1,8 @@
+// React
 import React, { Component } from 'react';
+
+// Children
+import GoHome from '../components/GoHome';
 
 class Ranking extends Component {
   render() {
@@ -7,6 +11,10 @@ class Ranking extends Component {
         <h1 data-testid="ranking-title">
           Ranking
         </h1>
+        {
+          /* Lista de Ranking */
+        }
+        <GoHome />
       </section>
     );
   }
