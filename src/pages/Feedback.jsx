@@ -1,6 +1,5 @@
 // React
 import React, { Component } from 'react';
-import HeaderGame from '../components/HeaderGame';
 
 // PropTypes
 import PropTypes from 'prop-types';
@@ -9,6 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Children
+import HeaderGame from '../components/HeaderGame';
 import PlayAgain from '../components/PlayAgain';
 import ViewRanking from '../components/ViewRanking';
 
