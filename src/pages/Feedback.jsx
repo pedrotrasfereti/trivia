@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
 
+// GravatarAPI
+import getGravatar from '../helpers/gravatarAPI';
+
 // Children
 import HeaderGame from '../components/HeaderGame';
 import PlayAgain from '../components/PlayAgain';
@@ -17,6 +20,25 @@ class Feedback extends Component {
     super(props);
 
     this.renderMessage = this.renderMessage.bind(this);
+  }
+
+  componentDidMount() {
+    const stateStorage = localStorage.getItem('state');
+    const stateJson = JSON.parse(stateStorage);
+    const { player: { gravatarEmail, name, score } } = stateJson;
+    const rankingStorage = localStorage.getItem('ranking');
+    const rankingJson = JSON.parse(rankingStorage);
+    const objRanking = {
+      name,
+      score,
+      picture: getGravatar(gravatarEmail),
+    };
+    const arrayRanking = [];
+    if (rankingJson) {
+      arrayRanking.push(...rankingJson);
+    }
+    arrayRanking.push(objRanking);
+    localStorage.setItem('ranking', JSON.stringify(arrayRanking));
   }
 
   renderMessage() {
