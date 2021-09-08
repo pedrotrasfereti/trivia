@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { setAnswers, setAssertions,
-  toggleTimer, setScore } from '../redux/actions/game';
+import { setAnswers, setAssertions, setScore } from '../redux/actions/game';
+import { toggleTimer } from '../redux/actions/timer';
 import { pressQuestionBtn } from '../redux/actions/pressBtn';
 
 // Helpers
@@ -73,6 +73,15 @@ class Gamepage extends React.Component {
       console.log('Alternativa incorreta.');
     }
 
+    const previous = JSON.parse(
+      localStorage.getItem('state'),
+    );
+
+    const updated = previous;
+
+    updated.player.assertions += assertions;
+
+    localStorage.setItem('state', JSON.stringify(updated));
     setAssertionsDispatch(assertions);
   }
 
@@ -211,7 +220,7 @@ Gamepage.propTypes = {
 const mapStateToProps = (state) => ({
   game: state.game.game,
   questionNumber: state.game.questionNumber,
-  timer: state.game.timer,
+  timer: state.timer.timer,
   playerName: state.login.nome,
   playerEmail: state.login.email,
 });
