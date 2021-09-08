@@ -31,16 +31,7 @@ class Feedback extends Component {
 
   renderFeedbackQuestion() {
     const { assertions } = this.props;
-    if (assertions === 0) {
-      return (
-        <span data-testid="feedback-total-question">Não acertou nenhuma pergunta</span>);
-    }
-    return (
-      <span data-testid="feedback-total-question">
-        Acertou
-        {assertions}
-        perguntas
-      </span>);
+    return <span data-testid="feedback-total-question">{assertions}</span>;
   }
 
   render() {
@@ -48,15 +39,19 @@ class Feedback extends Component {
     return (
       <section>
         <HeaderGame />
-        <span data-testid="feedback-text">
+        <div data-testid="feedback-text">
           { this.renderMessage() }
-        </span>
-        <span data-testid="feedback-total-score">
+        </div>
+        <div data-testid="feedback-total-score">
           { score }
-        </span>
-        <span data-testid="feedback-total-question-span">
+        </div>
+        <div className="feedback-total-question">
+          Voce acertou
+          {' '}
           { this.renderFeedbackQuestion() }
-        </span>
+          {' '}
+          questões!
+        </div>
         <PlayAgain />
         <ViewRanking />
       </section>
