@@ -7,6 +7,11 @@ import { withRouter } from 'react-router';
 // PropTypes
 import PropTypes from 'prop-types';
 
+// Redux
+import { connect } from 'react-redux';
+import { resetAll, resetScore } from '../redux/actions/game';
+import { resetTimer } from '../redux/actions/timer';
+
 class PlayAgain extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +20,15 @@ class PlayAgain extends Component {
   }
 
   redirectToHome() {
-    const { history } = this.props;
+    const {
+      history,
+      resetAllDispatch,
+      resetScoreDispatch,
+      resetTimerDispatch,
+    } = this.props;
+    resetTimerDispatch();
+    resetScoreDispatch();
+    resetAllDispatch();
     history.push('/');
   }
 
@@ -36,6 +49,15 @@ PlayAgain.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  resetAllDispatch: PropTypes.func.isRequired,
+  resetScoreDispatch: PropTypes.func.isRequired,
+  resetTimerDispatch: PropTypes.func.isRequired,
 };
 
-export default withRouter(PlayAgain);
+const mapDispatchToProps = (dispatch) => ({
+  resetAllDispatch: () => dispatch(resetAll()),
+  resetScoreDispatch: () => dispatch(resetScore()),
+  resetTimerDispatch: () => dispatch(resetTimer()),
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(PlayAgain));

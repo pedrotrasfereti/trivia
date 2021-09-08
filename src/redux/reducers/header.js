@@ -1,5 +1,6 @@
 import {
   SET_SCORE,
+  RESET_SCORE,
 } from '../actions/game';
 
 const INITIAL_STATE = {
@@ -12,6 +13,8 @@ const header = (state = INITIAL_STATE, action) => {
     return {
       ...state, score: action.payload,
     };
+  case RESET_SCORE:
+    return INITIAL_STATE;
   default:
     return state;
   }
