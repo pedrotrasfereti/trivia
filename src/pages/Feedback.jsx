@@ -17,6 +17,7 @@ class Feedback extends Component {
     super(props);
 
     this.renderMessage = this.renderMessage.bind(this);
+    this.renderFeedbackQuestion = this.renderFeedbackQuestion.bind(this);
   }
 
   renderMessage() {
@@ -28,13 +29,29 @@ class Feedback extends Component {
     return 'Mandou bem!';
   }
 
+  renderFeedbackQuestion() {
+    const { assertions } = this.props;
+    return <span data-testid="feedback-total-question">{assertions}</span>;
+  }
+
   render() {
+    const { score } = this.props;
     return (
       <section>
         <HeaderGame />
-        <span data-testid="feedback-text">
+        <div data-testid="feedback-text">
           { this.renderMessage() }
-        </span>
+        </div>
+        <div data-testid="feedback-total-score">
+          { score }
+        </div>
+        <div className="feedback-total-question">
+          Voce acertou
+          {' '}
+          { this.renderFeedbackQuestion() }
+          {' '}
+          questões!
+        </div>
         <PlayAgain />
         <ViewRanking />
       </section>
@@ -44,10 +61,12 @@ class Feedback extends Component {
 
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (store) => ({
   assertions: store.game.assertions, // Número de acertos
+  score: store.header.score,
 });
 
 export default connect(mapStateToProps, null)(Feedback);
