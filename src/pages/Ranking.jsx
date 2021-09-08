@@ -20,10 +20,10 @@ class Ranking extends Component {
       <div key={ index }>
         <img src={ item.picture } alt="Gravatar" />
         <h4 data-testid={ `player-name-${index}` }>
-          { `Nome: ${item.name}` }
+          {item.name}
         </h4>
         <h4 data-testid={ `player-score-${index}` }>
-          { `Pontuação: ${item.score}` }
+          {item.score}
         </h4>
       </div>
     ));
