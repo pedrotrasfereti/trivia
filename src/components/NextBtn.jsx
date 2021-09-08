@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
 import { pressNextBtn } from '../redux/actions/pressBtn';
-import { toggleTimer } from '../redux/actions/game';
+import { toggleTimer } from '../redux/actions/timer';
 
 class NextBtn extends React.Component {
   constructor() {

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { toggleTimer, setTimerGlobal } from '../redux/actions/game';
+import { toggleTimer, setTimerGlobal } from '../redux/actions/timer';
 
 class GameTimer extends Component {
   constructor(props) {
@@ -83,7 +83,7 @@ GameTimer.propTypes = {
 };
 
 const mapStateToProps = (store) => ({
-  timerOn: store.game.timerOn,
+  timerOn: store.timer.timerOn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
