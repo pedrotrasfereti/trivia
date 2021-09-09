@@ -21,6 +21,7 @@ import GameAnswers from '../components/GameAnswers';
 
 // Helpers
 import shuffleAnswers from '../helpers/shuffleAnswers';
+import decodeHtml from '../helpers/decodeHtml';
 
 // Styles
 import '../styles/Gamepage.css';
@@ -194,7 +195,7 @@ class Gamepage extends React.Component {
             { category }
           </h3>
           <p data-testid="question-text">
-            { question }
+            { decodeHtml(question) }
           </p>
           <GameAnswers />
         </div>
