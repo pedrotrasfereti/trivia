@@ -12,13 +12,10 @@ export const setGameInfo = (payload) => ({
   payload,
 });
 
-export const setAnswers = (payload) => {
-  console.log(payload);
-  return ({
-    type: SET_ANSWERS,
-    payload,
-  });
-};
+export const setAnswers = (payload) => ({
+  type: SET_ANSWERS,
+  payload,
+});
 
 export const setAssertions = (assertions) => ({
   type: SET_ASSERTIONS,

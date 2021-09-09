@@ -68,9 +68,6 @@ class Gamepage extends React.Component {
 
     if (target.id === 'correct-answer') {
       assertions += 1;
-      console.log('Alternativa correta!');
-    } else {
-      console.log('Alternativa incorreta.');
     }
 
     const previous = JSON.parse(
