@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   numberOfQuestions: 5,
   category: 'Any Category',
   difficult: 'Any Difficulty',
+  allCategories: [],
 };
 
 const settings = (state = INITIAL_STATE, action) => {
