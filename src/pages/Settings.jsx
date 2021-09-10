@@ -94,7 +94,7 @@ class Settings extends React.Component {
         <select
           select={ difficult }
           id="difficult"
-          className="form-control"
+          className="form-select"
           name="difficult"
           value={ difficult }
           onChange={ this.handleChange }
@@ -117,7 +117,7 @@ class Settings extends React.Component {
         Number of Questions:
         <select
           id="value"
-          className="form-control"
+          className="form-select"
           name="value"
           value={ value }
           onChange={ this.handleChange }
@@ -142,7 +142,7 @@ class Settings extends React.Component {
               Select Category:
               <select
                 id="categorias"
-                className="form-control"
+                className="form-select"
                 name="category"
                 value={ category }
                 onChange={ this.handleChange }
@@ -158,9 +158,10 @@ class Settings extends React.Component {
             <button
               type="button"
               className="btn btn-primary"
+              id="save"
               onClick={ this.save }
             >
-              Save Settings
+              Salvar
             </button>
           </div>
         </div>

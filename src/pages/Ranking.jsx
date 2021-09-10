@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 // Children
 import { GoHome } from '../components';
 
+import '../styles/Ranking.css';
+
 class Ranking extends Component {
   constructor() {
     super();
