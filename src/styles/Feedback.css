@@ -1,0 +1,62 @@
+.feedback-section {
+  align-items: center;
+  background-color: var(--bombay);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+  padding: 2em 4em;
+}
+
+.feedback-content {
+  background-color: var(--whitePage);
+  border-radius: 2vw;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1em;
+  padding: 4em;
+  width: 80%;
+}
+
+.feedback-text {
+  font-size: 3.7vw;
+}
+
+.feedback-total-score {
+  font-size: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback-total-score::before {
+  content: 'Seu placar:';
+  margin-right: 1em;
+}
+
+.feedback-total-question {
+  font-size: 2vw;
+}
+
+.info {
+  margin-bottom: 1em;
+}
+
+.feedback-btn {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.score-content {
+  background-color: var(--athens-gray);
+  border-radius: 95% 5% 90% 10% / 19% 74% 26% 81%;
+  margin: auto;
+  padding: 0.3vw;
+}
+
+.feedback-btn .btn {
+  font-size: 3vw;
+}

@@ -57,7 +57,7 @@ class NextBtn extends React.Component {
     return (
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-primary next-btn"
         onClick={ () => this.triggerNextQuestion() }
         data-testid="btn-next"
         style={
