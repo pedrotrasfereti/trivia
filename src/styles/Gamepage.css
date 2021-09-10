@@ -31,10 +31,6 @@
   align-items: center;
 }
 
-.question-content h3, .question-content p {
-  font-size: 2vw;
-}
-
 .game-answers button:nth-child(1) {
   background-color: var(--blue-bell);
 }
@@ -60,18 +56,39 @@
   margin-top: 2.3vw;
   background-color: var(--whitePage);
   border-radius: 9.8vw;
-  padding: 9vw;
+  padding: 7vw;
   width: 80%;
-}
-
-.progress-content {
-  height: 20px;
-  background-color: aqua;
-  width: 100%;
 }
 
 .question-content {
   min-height: 18vh;
   display: flex;
   flex-flow: column wrap;
+}
+
+.question-content h3, .question-content p {
+  font-size: 2.2vw;
+}
+
+.question-content h3::before{
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: 0;
+  width: 2vw;
+  height: 2vw;
+  -moz-border-radius: 7.5px;
+  -webkit-border-radius: 7.5px;
+  border-radius: 100%;
+  margin-right: 1vw;
+  background-color: var(--ronchi);
+}
+
+progress {
+  width: 100%;
+  height: 2vw;
+}
+
+.progress {
+  margin-bottom: 1vw;
 }
