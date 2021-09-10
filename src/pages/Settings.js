@@ -57,13 +57,13 @@ class Settings extends React.Component {
 
   mapAllCategories(param) {
     const { category } = this.state;
-    return param.map((el) => (
+    return param.map(({ id, name }) => (
       <option
-        selected={ el.id === category }
-        key={ el.id }
-        value={ el.id }
+        selected={ id === category }
+        key={ id }
+        value={ id }
       >
-        {el.name}
+        {name}
       </option>));
   }
 
