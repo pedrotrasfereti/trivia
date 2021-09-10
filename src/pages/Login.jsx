@@ -10,7 +10,7 @@ import validateLogin from '../redux/actions/validateLogin';
 import { setGameInfo } from '../redux/actions/game';
 
 // Services
-import apiTrivia from '../services/apiTrivia';
+import { apiTrivia } from '../services/apiTrivia';
 import { putTokenInLocalStorage } from '../services/servicesAPI';
 
 // Children
@@ -36,10 +36,11 @@ class Login extends React.Component {
   }
 
   async setQuestions() {
-    const { dispatchGameInfo } = this.props;
+    const { dispatchGameInfo, numberOfQuestions, category, difficult } = this.props;
+
     const token = localStorage.getItem('token') || '';
 
-    await apiTrivia(token)
+    await apiTrivia(token, numberOfQuestions, category, difficult)
       .then((results) => dispatchGameInfo(results));
 
     // Redirecionar para a tela de jogo
@@ -106,13 +107,22 @@ Login.propTypes = {
   dispatchValidateLogin: PropTypes.func.isRequired,
   dispatchGameInfo: PropTypes.func.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func,
   }).isRequired,
+  numberOfQuestions: PropTypes.number.isRequired,
+  category: PropTypes.string.isRequired,
+  difficult: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  numberOfQuestions: state.settings.numberOfQuestions,
+  category: state.settings.category,
+  difficult: state.settings.difficult,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchValidateLogin: (value) => dispatch(validateLogin(value)),
   dispatchGameInfo: (value) => dispatch(setGameInfo(value)),
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
