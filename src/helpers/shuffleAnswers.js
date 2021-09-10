@@ -1,4 +1,8 @@
+// React
 import React from 'react';
+
+// Helpers
+import decodeHtml from './decodeHtml';
 
 const shuffleAnswers = (
   game, // Jogo
@@ -20,7 +24,7 @@ const shuffleAnswers = (
         key={ `wrong-answer-${index}` }
         onClick={ (evt) => answered(evt) }
       >
-        {answer}
+        {decodeHtml(answer)}
 
       </button>)));
 
@@ -34,7 +38,7 @@ const shuffleAnswers = (
         key="correct-answer"
         onClick={ (evt) => answered(evt) }
       >
-        {answer}
+        {decodeHtml(answer)}
 
       </button>)));
 
