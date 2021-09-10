@@ -185,7 +185,9 @@ class Gamepage extends React.Component {
           enableNextBtn={ this.enableNextBtn }
         />
         <div className="questions-content">
-          <div className="progress-content" />
+          <div className="progress">
+            <progress value={ 2 } max={ 30 } />
+          </div>
           <div className="question-content">
             <h3 data-testid="question-category">
               { category }
@@ -199,8 +201,7 @@ class Gamepage extends React.Component {
           </div>
         </div>
         <NextBtn setAnswers={ this.setAnswers } />
-      </section>
-    );
+      </section>);
   }
 }
 
