@@ -1,21 +1,51 @@
 .Login {
+  align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
   height: 100vh;
+  justify-content: space-between;
 }
 
-.Hero {
-  background-color: #333;
-}
-
-.Login-Form {
+.Login .Login-Wrapper {
   align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.Login .Login-Form {
   background-color: white;
+  -webkit-box-shadow: 0 0 20px 1px var(--background-shadow);
+  -moz-box-shadow: 0 0 20px 1px var(--background-shadow);
+  box-shadow: 0 0 20px 1px var(--background-shadow);
+  border-radius: 10px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-start;
-  border: 1px solid grey;
-  border-radius: 10px;
+  height: 395px;
+  padding: 30px;
+  width: 335px;
+}
+
+.Login .NameInput {
+  margin: 0 0 20px;
+}
+
+.Login .NameInput input {
+  margin: 5px 0 0;
+}
+
+.Login .EmailInput {
+  margin: 0 0 20px;
+}
+
+.Login .EmailInput input {
+  margin: 5px 0 0;
+}
+
+.Login .SubmitLogin {
+  margin: 0 0 5px;
+}
+
+.Login .ViewSettings {
+  margin: 5px 0 0;
 }

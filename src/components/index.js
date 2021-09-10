@@ -8,6 +8,6 @@ export { default as Loading } from './Loading';
 export { default as NameInput } from './NameInput';
 export { default as NextBtn } from './NextBtn';
 export { default as PlayAgain } from './PlayAgain';
-export { default as Settings } from './Settings';
+export { default as ViewSettings } from './ViewSettings';
 export { default as SubmitLogin } from './SubmitLogin';
 export { default as ViewRanking } from './ViewRanking';

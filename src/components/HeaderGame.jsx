@@ -22,6 +22,7 @@ class HeaderGame extends Component {
           id="header-profile-picture"
           data-testid="header-profile-picture"
           alt="gravatar"
+          className="img-header"
         />
         {/* Nome do jogador */}
         <span
