@@ -184,14 +184,19 @@ class Gamepage extends React.Component {
           addStyles={ this.addStyles }
           enableNextBtn={ this.enableNextBtn }
         />
-        <div>
-          <h3 data-testid="question-category">
-            { category }
-          </h3>
-          <p data-testid="question-text">
-            { decodeHtml(question) }
-          </p>
-          <GameAnswers />
+        <div className="questions-content">
+          <div className="progress-content" />
+          <div className="question-content">
+            <h3 data-testid="question-category">
+              { category }
+            </h3>
+            <p data-testid="question-text">
+              { decodeHtml(question) }
+            </p>
+          </div>
+          <div className="game-answers">
+            <GameAnswers />
+          </div>
         </div>
         <NextBtn setAnswers={ this.setAnswers } />
       </section>

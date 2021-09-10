@@ -26,26 +26,14 @@
   width: 335px;
 }
 
-.Login .NameInput {
+.Login .NameInput, .Login .EmailInput {
   margin: 0 0 20px;
 }
 
-.Login .NameInput input {
-  margin: 5px 0 0;
-}
-
-.Login .EmailInput {
-  margin: 0 0 20px;
-}
-
-.Login .EmailInput input {
+.Login .NameInput input, .Login .EmailInput input, .Login .ViewSettings {
   margin: 5px 0 0;
 }
 
 .Login .SubmitLogin {
   margin: 0 0 5px;
-}
-
-.Login .ViewSettings {
-  margin: 5px 0 0;
 }

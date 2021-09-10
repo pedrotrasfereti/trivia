@@ -1,0 +1,30 @@
+header {
+  align-items: center;
+  background-color: var(--whitePage);
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+.img-header {
+  width: 3vw;
+  border-radius: 100%;
+  justify-self: flex-start;
+}
+
+.player-name {
+  font-size: 2vw;
+  font-style: italic;
+}
+
+.header-score {
+  font-size: 2vw;
+  justify-self: flex-end;
+}
+
+.header-score::before {
+  content: 'Score:';
+  margin-right: 1vw;
+}

@@ -69,7 +69,7 @@ class GameTimer extends Component {
   render() {
     const { timeLeft } = this.state;
     return (
-      <span>{ timeLeft }</span>
+      <span className="timer">{ timeLeft }</span>
     );
   }
 }

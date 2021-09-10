@@ -1,9 +1,77 @@
+.Gamepage {
+  align-items: center;
+  background-color: var(--bombay);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2em 4em;
+}
+
+.timer {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 /* Borda alternativa correta */
 .Gamepage .correct-highlight {
-  border: 3px solid rgb(6, 240, 15);
+  box-shadow: inset 0px 0px 5px 5px var(--correct-question);
 }
 
 /* Borda alternativas incorretas */
 .Gamepage .incorrect-highlight {
-  border: 3px solid red;
+  box-shadow: inset 0px 0px 5px 5px var(--wrong-question);
+}
+
+.game-answers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.question-content h3, .question-content p {
+  font-size: 2vw;
+}
+
+.game-answers button:nth-child(1) {
+  background-color: var(--blue-bell);
+}
+.game-answers button:nth-child(2){
+  background-color: var(--ronchi);
+}
+.game-answers button:nth-child(3) {
+  background-color: var(--steel-blue);
+}
+.game-answers button:nth-child(4) {
+  background-color: var(--light-orchid);
+}
+
+.game-answers button {
+  padding: 1.4vw;
+}
+
+.next-btn {
+  margin: 1em auto;
+}
+
+.questions-content {
+  margin-top: 2.3vw;
+  background-color: var(--whitePage);
+  border-radius: 9.8vw;
+  padding: 9vw;
+  width: 80%;
+}
+
+.progress-content {
+  height: 20px;
+  background-color: aqua;
+  width: 100%;
+}
+
+.question-content {
+  min-height: 18vh;
+  display: flex;
+  flex-flow: column wrap;
 }
