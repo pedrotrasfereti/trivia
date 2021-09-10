@@ -11,7 +11,7 @@ class SubmitLogin extends Component {
       <button
         disabled={ statusButton }
         type="button"
-        className="btn btn-primary"
+        className="SubmitLogin btn btn-primary"
         data-testid="btn-play"
         onClick={ submitLogin }
       >

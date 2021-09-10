@@ -8,7 +8,7 @@ class NameInput extends Component {
   render() {
     const { name, handleChange } = this.props;
     return (
-      <label htmlFor="name-input">
+      <label className="NameInput" htmlFor="name-input">
         Nome:
         <input
           type="text"

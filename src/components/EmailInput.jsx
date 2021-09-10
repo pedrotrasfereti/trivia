@@ -8,7 +8,7 @@ class EmailInput extends Component {
   render() {
     const { email, handleChange } = this.props;
     return (
-      <label htmlFor="email-input">
+      <label className="EmailInput" htmlFor="email-input">
         Email:
         <input
           type="text"

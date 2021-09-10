@@ -14,7 +14,7 @@ import { apiTrivia } from '../services/apiTrivia';
 import { putTokenInLocalStorage } from '../services/servicesAPI';
 
 // Children
-import { EmailInput, NameInput, Settings, SubmitLogin } from '../components';
+import { EmailInput, NameInput, ViewSettings, SubmitLogin, Hero } from '../components';
 
 // Styles
 import '../styles/Login.css';
@@ -75,6 +75,7 @@ class Login extends React.Component {
     const statusButton = !(regexEmail.test(email) && nome.length > 0);
     return (
       <main className="Login">
+        <Hero />
         <div className="Login-Wrapper">
           <div className="Login-Form">
             { /* Input de Nome */ }
@@ -92,8 +93,9 @@ class Login extends React.Component {
               statusButton={ statusButton }
               submitLogin={ this.submitLogin }
             />
+            <hr className="hr" />
             { /* Configurações */ }
-            <Settings
+            <ViewSettings
               openSettings={ this.openSettings }
             />
           </div>

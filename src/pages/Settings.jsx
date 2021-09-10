@@ -2,7 +2,7 @@
 import React from 'react';
 
 // PropTypes
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
@@ -18,6 +18,9 @@ import { fetchCategories } from '../services/apiTrivia';
 
 // Children
 import { GoHome } from '../components';
+
+// Styles
+import '../styles/Settings.css';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -59,11 +62,13 @@ class Settings extends React.Component {
       configGameCategoryDispatch,
       configGameNumberDispatch,
       configGameDifficultDispatch,
+      history,
     } = this.props;
     const { category, value, difficult } = this.state;
     configGameCategoryDispatch(category);
     configGameDifficultDispatch(difficult);
     configGameNumberDispatch(value);
+    history.push('/');
   }
 
   mapAllCategories(param) {
@@ -84,11 +89,12 @@ class Settings extends React.Component {
   renderDifficulty() {
     const { difficult } = this.state;
     return (
-      <label htmlFor="difficult">
+      <label className="SelectDifficulty" htmlFor="difficult">
         Select Difficulty:
         <select
           select={ difficult }
           id="difficult"
+          className="form-control"
           name="difficult"
           value={ difficult }
           onChange={ this.handleChange }
@@ -107,10 +113,11 @@ class Settings extends React.Component {
   renderValues() {
     const { value } = this.state;
     return (
-      <label htmlFor="value">
+      <label className="SelectQuantity" htmlFor="value">
         Number of Questions:
         <select
           id="value"
+          className="form-control"
           name="value"
           value={ value }
           onChange={ this.handleChange }
@@ -126,41 +133,55 @@ class Settings extends React.Component {
   render() {
     const { allcategories, category } = this.state;
     return (
-      <div>
-        <h1 data-testid="settings-title">Configurações</h1>
-        {this.renderValues()}
-        <label htmlFor="categorias">
-          Select Category:
-          <select
-            id="categorias"
-            name="category"
-            value={ category }
-            onChange={ this.handleChange }
-          >
-            {this.mapAllCategories(allcategories)}
-          </select>
-        </label>
-        {this.renderDifficulty()}
+      <section className="Settings">
+        <div className="Settings-Wrapper">
+          <h1 data-testid="settings-title">Configurações</h1>
+          <div className="Settings-Fieldset">
+            {this.renderValues()}
+            <label className="SelectCategory" htmlFor="categorias">
+              Select Category:
+              <select
+                id="categorias"
+                className="form-control"
+                name="category"
+                value={ category }
+                onChange={ this.handleChange }
+              >
+                {this.mapAllCategories(allcategories)}
+              </select>
+            </label>
+            {this.renderDifficulty()}
+          </div>
 
-        <div className="btn-div">
-          <GoHome />
-          <button onClick={ this.save } type="button">Save Config</button>
+          <div className="Settings-Btns">
+            <GoHome />
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={ this.save }
+            >
+              Save Settings
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
 
     );
   }
 }
 
 Settings.propTypes = {
-  allcategories: propTypes.arrayOf(propTypes.object).isRequired,
-  category: propTypes.string.isRequired,
-  value: propTypes.string.isRequired,
-  difficult: propTypes.string.isRequired,
-  configGameAllCategoriesDispatch: propTypes.func.isRequired,
-  configGameCategoryDispatch: propTypes.func.isRequired,
-  configGameNumberDispatch: propTypes.func.isRequired,
-  configGameDifficultDispatch: propTypes.func.isRequired,
+  allcategories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  category: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  difficult: PropTypes.string.isRequired,
+  configGameAllCategoriesDispatch: PropTypes.func.isRequired,
+  configGameCategoryDispatch: PropTypes.func.isRequired,
+  configGameNumberDispatch: PropTypes.func.isRequired,
+  configGameDifficultDispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({

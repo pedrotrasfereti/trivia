@@ -1,0 +1,26 @@
+.Hero {
+  background: var(--hero-background) url('../images/Question-Background.png') center;
+  background-size: 100%;
+  box-shadow: 0 0 10px 5px var(--background-shadow);
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  margin: 0 50px 0 0;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.Hero h1 {
+  color: var(--title);
+  font: 600 52px Poppins, sans-serif;
+  text-shadow: 5px 5px 5px var(--text-shadow);
+  margin: 0 0 0 50px;
+}
+
+.Hero p {
+  color: var(--subtitle);
+  font: 400 18px Poppins, sans-serif;
+  text-shadow: 5px 5px 5px var(--text-shadow);
+  width: 400px;
+  margin: 10px 0 0 50px;
+}

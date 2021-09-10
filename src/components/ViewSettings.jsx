@@ -4,13 +4,13 @@ import React, { Component } from 'react';
 // PropTypes
 import PropTypes from 'prop-types';
 
-class Settings extends Component {
+class ViewSettings extends Component {
   render() {
     const { openSettings } = this.props;
     return (
       <button
         type="button"
-        className="btn btn-secondary"
+        className="ViewSettings btn btn-secondary"
         data-testid="btn-settings"
         onClick={ openSettings }
       >
@@ -20,8 +20,8 @@ class Settings extends Component {
   }
 }
 
-Settings.propTypes = {
+ViewSettings.propTypes = {
   openSettings: PropTypes.func.isRequired,
 };
 
-export default Settings;
+export default ViewSettings;
