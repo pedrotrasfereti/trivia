@@ -56,10 +56,8 @@ class Settings extends React.Component {
   }
 
   mapAllCategories(param) {
-    const { category } = this.state;
     return param.map(({ id, name }) => (
       <option
-        selected={ id === category }
         key={ id }
         value={ id }
       >
@@ -81,17 +79,15 @@ class Settings extends React.Component {
           select={ difficult }
           id="difficult"
           name="difficult"
+          value={ difficult }
           onChange={ this.handleChange }
         >
-          <option
-            selected={ difficult === 'Any Difficulty' }
-            value="Any Difficulty"
-          >
+          <option value="Any Difficulty">
             Any Difficulty
           </option>
-          <option selected={ difficult === 'easy' } value="easy">Easy</option>
-          <option selected={ difficult === 'medium' } value="medium">Medium</option>
-          <option selected={ difficult === 'hard' } value="hard">Hard</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
         </select>
       </label>
     );
@@ -105,18 +101,19 @@ class Settings extends React.Component {
         <select
           id="value"
           name="value"
+          value={ value }
           onChange={ this.handleChange }
         >
-          <option selected={ value === '5' } value="5">5</option>
-          <option selected={ value === '10' } value="10">10</option>
-          <option selected={ value === '15' } value="15">15</option>
-          <option selected={ value === '20' } value="20">20</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
         </select>
       </label>);
   }
 
   render() {
-    const { allcategories } = this.state;
+    const { allcategories, category } = this.state;
     return (
       <div>
         <h1 data-testid="settings-title">Configurações</h1>
@@ -126,6 +123,7 @@ class Settings extends React.Component {
           <select
             id="categorias"
             name="category"
+            value={ category }
             onChange={ this.handleChange }
           >
             {this.mapAllCategories(allcategories)}
