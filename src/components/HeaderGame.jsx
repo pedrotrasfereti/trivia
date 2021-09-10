@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
 
-// Helpers
-import gravatar from '../helpers/gravatarAPI';
+// Services
+import gravatar from '../services/gravatarAPI';
 
 class HeaderGame extends Component {
   render() {

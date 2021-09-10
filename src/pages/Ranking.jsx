@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Children
-import GoHome from '../components/GoHome';
+import { GoHome } from '../components';
 
 class Ranking extends Component {
   constructor() {

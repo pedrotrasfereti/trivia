@@ -36,6 +36,7 @@ class PlayAgain extends Component {
     return (
       <button
         type="button"
+        className="btn btn-primary"
         data-testid="btn-play-again"
         onClick={ () => this.redirectToHome() }
       >

@@ -7,13 +7,11 @@ import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
 
-// GravatarAPI
-import getGravatar from '../helpers/gravatarAPI';
+// Services
+import getGravatar from '../services/gravatarAPI';
 
 // Children
-import HeaderGame from '../components/HeaderGame';
-import PlayAgain from '../components/PlayAgain';
-import ViewRanking from '../components/ViewRanking';
+import { HeaderGame, PlayAgain, ViewRanking } from '../components';
 
 class Feedback extends Component {
   constructor(props) {

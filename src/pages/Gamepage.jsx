@@ -10,14 +10,11 @@ import { setAnswers, setAssertions, setScore } from '../redux/actions/game';
 import { toggleTimer } from '../redux/actions/timer';
 import { pressQuestionBtn } from '../redux/actions/pressBtn';
 
-// Helpers
-import gravatar from '../helpers/gravatarAPI';
+// Services
+import gravatar from '../services/gravatarAPI';
 
 // Children
-import HeaderGame from '../components/HeaderGame';
-import NextBtn from '../components/NextBtn';
-import GameTimer from '../components/GameTimer';
-import GameAnswers from '../components/GameAnswers';
+import { HeaderGame, NextBtn, GameTimer, GameAnswers } from '../components';
 
 // Helpers
 import shuffleAnswers from '../helpers/shuffleAnswers';
