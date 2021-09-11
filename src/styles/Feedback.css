@@ -1,20 +1,21 @@
 .feedback-section {
   align-items: center;
+  background: var(--background) url('../images/Question-Background.png') center;
   background-color: var(--bombay);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   justify-content: space-between;
+  min-height: 100vh;
   padding: 2em 4em;
 }
 
 .feedback-content {
+  align-items: center;
   background-color: var(--blue-bell);
   border-radius: 2vw;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  align-items: center;
   margin: 1em;
   padding: 4em;
   width: 80%;
@@ -22,18 +23,18 @@
 
 .feedback-text {
   font-size: 3.7vw;
-  font-weight: 900;
   font-variant: small-caps;
+  font-weight: 900;
 }
 
 .feedback-total-score {
-  font-size: 2vw;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  font-size: 2vw;
+  justify-content: center;
 }
 
-.feedback-total-score::before {
+.feedback-total-score:before {
   content: 'Seu placar:';
   margin-right: 1em;
 }
@@ -64,14 +65,15 @@
   margin: 0 1vw;
 }
 
-@media (max-width: 789px) {
+@media ( max-width : 789px ) {
+
   .feedback-content {
+    align-items: center;
     border-radius: 2vw;
-    height: 60vh;
     display: flex;
     flex-flow: column wrap;
+    height: 60vh;
     justify-content: flex-start;
-    align-items: center;
     margin: 1em;
     padding: 4em;
     width: 80%;
@@ -79,7 +81,8 @@
 }
 
 
-@media (min-width: 789px) {
+@media ( min-width : 789px ) {
+
   .feedback-btn .btn {
     font-size: 1vw;
     margin: 0 1vw;

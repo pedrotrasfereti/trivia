@@ -15,10 +15,8 @@
 
 .Login .Login-Form {
   background-color: white;
-  -webkit-box-shadow: 0 0 20px 1px var(--background-shadow);
-  -moz-box-shadow: 0 0 20px 1px var(--background-shadow);
-  box-shadow: 0 0 20px 1px var(--background-shadow);
   border-radius: 10px;
+  box-shadow: 0 0 20px 1px var(--background-shadow);
   display: flex;
   flex-flow: column nowrap;
   height: 395px;
@@ -30,9 +28,7 @@
   margin: 0 0 20px;
 }
 
-.Login .NameInput input,
-.Login .EmailInput input,
-.Login .ViewSettings {
+.Login .NameInput input, .Login .EmailInput input, .Login .ViewSettings {
   margin: 5px 0 0;
 }
 
