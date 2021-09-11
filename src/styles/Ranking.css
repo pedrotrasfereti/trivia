@@ -1,7 +1,7 @@
-.btn {
+.rankingPage .btn {
   font-weight: 400;
   line-height: 1.5;
-  background-color: #228be6;
+  background-color: var(--steel-blue);
   color: var(--background);
   text-align: center;
   text-decoration: none;

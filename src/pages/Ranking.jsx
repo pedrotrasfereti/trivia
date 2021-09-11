@@ -33,7 +33,7 @@ class Ranking extends Component {
 
   render() {
     return (
-      <section>
+      <section className="rankingPage">
         <h1 data-testid="ranking-title">
           Ranking
         </h1>
