@@ -30,7 +30,9 @@
   margin: 0 0 20px;
 }
 
-.Login .NameInput input, .Login .EmailInput input, .Login .ViewSettings {
+.Login .NameInput input,
+.Login .EmailInput input,
+.Login .ViewSettings {
   margin: 5px 0 0;
 }
 
