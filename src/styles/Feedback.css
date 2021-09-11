@@ -9,10 +9,10 @@
 }
 
 .feedback-content {
-  background-color: var(--whitePage);
+  background-color: var(--blue-bell);
   border-radius: 2vw;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
   margin: 1em;
@@ -22,6 +22,8 @@
 
 .feedback-text {
   font-size: 3.7vw;
+  font-weight: 900;
+  font-variant: small-caps;
 }
 
 .feedback-total-score {
@@ -46,12 +48,12 @@
 
 .feedback-btn {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
 }
 
 .score-content {
-  background-color: var(--athens-gray);
+  background-color: var(--marzipan);
   border-radius: 95% 5% 90% 10% / 19% 74% 26% 81%;
   margin: auto;
   padding: 0.3vw;
@@ -59,4 +61,27 @@
 
 .feedback-btn .btn {
   font-size: 3vw;
+  margin: 0 1vw;
+}
+
+@media (max-width: 789px) {
+  .feedback-content {
+    border-radius: 2vw;
+    height: 60vh;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1em;
+    padding: 4em;
+    width: 80%;
+  }
+}
+
+
+@media (min-width: 789px) {
+  .feedback-btn .btn {
+    font-size: 1vw;
+    margin: 0 1vw;
+  }
 }
