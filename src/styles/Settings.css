@@ -46,7 +46,9 @@
   margin: 0 0 15px;
 }
 
-.Settings .SelectQuantity select, .Settings .SelectCategory select {
+.Settings .SelectQuantity select,
+.Settings .SelectCategory select,
+.Settings .SelectDifficulty select {
   margin: 5px 0 0;
 }
 
