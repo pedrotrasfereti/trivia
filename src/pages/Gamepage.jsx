@@ -185,7 +185,9 @@ class Gamepage extends React.Component {
           enableNextBtn={ this.enableNextBtn }
         />
         <div className="questions-content">
-          <progress max="30" value={ timer } />
+          <div className="progress">
+            <progress className='progress-bar' value={ 31-timer } max={ 30 } />
+          </div>
           <div className="question-content">
             <h3 data-testid="question-category">
               { category }
