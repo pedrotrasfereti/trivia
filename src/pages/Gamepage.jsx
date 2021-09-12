@@ -174,7 +174,7 @@ class Gamepage extends React.Component {
   }
 
   render() {
-    const { game, questionNumber, timer } = this.props;
+    const { timer, game, questionNumber } = this.props;
     const { category, question } = game[questionNumber];
 
     return (
@@ -185,9 +185,7 @@ class Gamepage extends React.Component {
           enableNextBtn={ this.enableNextBtn }
         />
         <div className="questions-content">
-          <div className="progress">
-            <progress role="progressbar" className='progress-bar progress-bar-striped bg-warning' style={{'width':31-timer/100}} aria-valuemin="0" aria-valuemax="100" value={ 31-timer } />
-          </div>
+          <progress max="30" value={ timer } />
           <div className="question-content">
             <h3 data-testid="question-category">
               { category }
@@ -222,7 +220,6 @@ const mapStateToProps = (state) => ({
   timer: state.timer.timer,
   game: state.game.game,
   questionNumber: state.game.questionNumber,
-  timer: state.timer.timer,
   playerName: state.login.nome,
   playerEmail: state.login.email,
 });
