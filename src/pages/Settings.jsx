@@ -157,8 +157,7 @@ class Settings extends React.Component {
             <GoHome />
             <button
               type="button"
-              className="btn btn-primary"
-              id="save"
+              className="btn btn-success"
               onClick={ this.save }
             >
               Salvar
@@ -166,7 +165,6 @@ class Settings extends React.Component {
           </div>
         </div>
       </section>
-
     );
   }
 }

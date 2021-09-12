@@ -111,7 +111,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-  numberOfQuestions: PropTypes.number.isRequired,
+  numberOfQuestions: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   difficult: PropTypes.string.isRequired,
 };
