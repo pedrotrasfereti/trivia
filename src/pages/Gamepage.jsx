@@ -176,8 +176,6 @@ class Gamepage extends React.Component {
   render() {
     const { timer, game, questionNumber } = this.props;
     const { category, question } = game[questionNumber];
-    const thirtyOne = 31;
-    const progress = (thirtyOne - timer);
 
     return (
       <section className="Gamepage">
@@ -187,7 +185,7 @@ class Gamepage extends React.Component {
           enableNextBtn={ this.enableNextBtn }
         />
         <div className="questions-content">
-          <progress value={ progress } max={ 30 } />
+          <progress value={ timer-0.5 } max={ 30 } />
           <div className="question-content">
             <h3 data-testid="question-category">
               { category }
