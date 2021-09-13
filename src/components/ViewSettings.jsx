@@ -14,6 +14,7 @@ class ViewSettings extends Component {
         data-testid="btn-settings"
         onClick={ openSettings }
       >
+      <img style={{position: 'relative', left:'-30%', marginLeft: '1vw'}} src='http://cdn.onlinewebfonts.com/svg/img_161329.png' width='20px' />
         Configurações
       </button>
     );
