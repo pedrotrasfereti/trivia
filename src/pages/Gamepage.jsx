@@ -150,7 +150,7 @@ class Gamepage extends React.Component {
       // Obtendo dados do localStorage
       const state = JSON.parse(localStorage.getItem('state'));
       const defaultReward = 10;
-      state.player.score += defaultReward + valor * timer;
+      state.player.score += defaultReward + valor * Math.round(parseInt(timer*100,12)/100);
       // devolvendo os dados para o localStorage
       localStorage.setItem('state', JSON.stringify(state));
       scoreDispatch(state.player.score);
