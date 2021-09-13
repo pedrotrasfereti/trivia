@@ -63,7 +63,8 @@
   border-radius: 6vw;
   margin-top: 2.3vw;
   padding: 6vw;
-  width: 80%;
+  max-width: 80%;
+  min-width: 80%;
 }
 
 @media ( min-width : 789px ) {
@@ -73,7 +74,8 @@
     border-radius: 2vw;
     margin-top: 2.3vw;
     padding: 3vw;
-    width: 80%;
+    max-width: 80%;
+    min-width: 80%;
   }
 
 }
