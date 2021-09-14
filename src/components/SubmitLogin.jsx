@@ -15,10 +15,10 @@ class SubmitLogin extends Component {
         data-testid="btn-play"
         onClick={ submitLogin }
       >
-      {!statusButton && <img style={{position: 'relative', left:'-42%', marginLeft: '1vw'}} src='https://wikiapk.com/wp-content/uploads/2021/06/1165645_featured.png' width='20px' /> }
+        {!statusButton && <img style={ { position: 'relative', left: '-42%', marginLeft: '1vw' } } src="https://wikiapk.com/wp-content/uploads/2021/06/1165645_featured.png" alt="login-btn" width="20px" /> }
         Jogar
       </button>
-      );
+    );
   }
 }
 
