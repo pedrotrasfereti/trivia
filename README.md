@@ -2,4 +2,4 @@
 Quiz de perguntas e respostas para jogar em conjunto com os seus amigos, responsivo para Desktop e Mobile. Projeto em grupo sugerido pela [Trybe](https://github.com/tryber/) para prática dos conhecimentos adquiridos em JavaScript, React, Redux e consumo de APIs.
 
 # Acesso
-Disponível no [Vercel](https://trybe-trivia.vercel.app/).
+Disponível no [Vercel](https://trybe-trivia.vercel.app/). 🎲🎯🥇
